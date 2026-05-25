@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Dunărea — Cazare în Orșova, cu vedere panoramică</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1ea;
+    --bg-warm: #ede5d6;
+    --ink: #2a2520;
+    --ink-soft: #5a4f44;
+    --accent: #c4622d;
+    --accent-deep: #8a3f15;
+    --gold: #b88a3e;
+    --green: #4a6b3a;
+    --paper: #fbf8f2;
+    --shadow: rgba(42, 37, 32, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245, 241, 234, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(42, 37, 32, 0.08);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  .logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('Vedere_Dunare.png');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(42, 37, 32, 0.25) 0%,
+      rgba(42, 37, 32, 0.1) 40%,
+      rgba(245, 241, 234, 0.85) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 6vw;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    color: #fff;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .hero-tag::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: #fff;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 110px);
+    line-height: 0.95;
+    font-weight: 500;
+    margin-bottom: 24px;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    max-width: 900px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #ffd9ad;
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: 19px;
+    max-width: 560px;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 38px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid var(--accent);
+  }
+  .hero-cta:hover {
+    background: transparent;
+    transform: translateY(-2px);
+  }
+  .hero-cta .arrow { transition: transform 0.3s; }
+  .hero-cta:hover .arrow { transform: translateX(6px); }
+  .hero-meta {
+    position: absolute;
+    bottom: 50px;
+    right: 6vw;
+    z-index: 2;
+    color: #fff;
+    text-align: right;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .hero-meta strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #ffd9ad;
+    display: block;
+    margin-top: 4px;
+  }
+  @media (max-width: 768px) {
+    .hero-meta { display: none; }
+  }
+
+  /* ============ INTRO ============ */
+  .intro {
+    padding: 120px 6vw;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .intro { grid-template-columns: 1fr; gap: 40px; padding: 80px 6vw; }
+  }
+  .intro-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .intro h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .intro h2 em { font-style: italic; color: var(--accent-deep); }
+  .intro p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .intro-image {
+    aspect-ratio: 4/5;
+    background-image: url('Casa.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 80px var(--shadow);
+    position: relative;
+  }
+  .intro-image::before {
+    content: '';
+    position: absolute;
+    top: 20px; right: -20px; bottom: -20px; left: 20px;
+    border: 1px solid var(--accent);
+    z-index: -1;
+  }
+
+  /* ============ FACILITIES ============ */
+  .facilities {
+    background: var(--bg-warm);
+    padding: 100px 6vw;
+  }
+  .facilities-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  .section-head .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .section-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4.5vw, 58px);
+    line-height: 1.05;
+  }
+  .section-head h2 em { font-style: italic; color: var(--accent-deep); }
+  .section-head .sub {
+    margin-top: 18px;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 17px;
+  }
+
+  .facility-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  @media (max-width: 900px) {
+    .facility-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .facility-grid { grid-template-columns: 1fr; }
+  }
+  .fac {
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--paper);
+    border: 1px solid rgba(42, 37, 32, 0.06);
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .fac:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px var(--shadow);
+  }
+  .fac-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+  }
+  .fac h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .fac p {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ============ GALLERY ============ */
+  .gallery {
+    padding: 120px 6vw;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .room {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+    margin-bottom: 130px;
+  }
+  .room:nth-child(even) .room-img { order: 2; }
+  @media (max-width: 900px) {
+    .room { grid-template-columns: 1fr; gap: 30px; margin-bottom: 80px; }
+    .room:nth-child(even) .room-img { order: 0; }
+  }
+  .room-img {
+    aspect-ratio: 5/4;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 70px var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .room-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(255,255,255,0.4);
+    margin: 16px;
+    pointer-events: none;
+  }
+  .room-text .room-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .room-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .room-text h3 em { font-style: italic; color: var(--accent-deep); }
+  .room-text p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+  .room-features {
+    list-style: none;
+    margin-top: 24px;
+    border-top: 1px solid rgba(42, 37, 32, 0.15);
+    padding-top: 24px;
+  }
+  .room-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(42, 37, 32, 0.08);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+  }
+  .room-features li span:last-child { color: var(--accent); }
+
+  /* ============ VIEW SECTION ============ */
+  .view-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 120px 6vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .view-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('Vedere_Dunare.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.25;
+  }
+  .view-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .view-inner .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #ffd9ad;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .view-inner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 68px);
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .view-inner h2 em { font-style: italic; color: #ffd9ad; }
+  .view-inner p {
+    font-size: 19px;
+    opacity: 0.85;
+    font-weight: 300;
+  }
+
+  /* ============ ATTRACTIONS ============ */
+  .attractions {
+    padding: 120px 6vw;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .attractions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 60px;
+  }
+  @media (max-width: 900px) {
+    .attractions-grid { grid-template-columns: 1fr; }
+  }
+  .attraction {
+    background: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 20px 50px var(--shadow);
+    transition: transform 0.4s;
+    display: flex;
+    flex-direction: column;
+  }
+  .attraction:hover { transform: translateY(-8px); }
+  .attraction-img {
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .attraction-badge {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: var(--paper);
+    color: var(--accent-deep);
+    padding: 8px 16px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+  }
+  .attraction-body {
+    padding: 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .attraction-body h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .attraction-body h4 em { font-style: italic; color: var(--accent-deep); }
+  .attraction-body p {
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    flex: 1;
+  }
+  .attraction-meta {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid rgba(42, 37, 32, 0.1);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .attraction-meta span:last-child {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .attraction-wide {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .attraction-wide .attraction-img {
+    height: auto;
+    min-height: 320px;
+  }
+  @media (max-width: 700px) {
+    .attraction-wide { grid-template-columns: 1fr; }
+  }
+
+  /* ============ LOCATION ============ */
+  .location {
+    background: var(--bg-warm);
+    padding: 120px 6vw;
+  }
+  .location-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .location-inner { grid-template-columns: 1fr; }
+    .location { padding: 80px 6vw; }
+  }
+  .location-img {
+    aspect-ratio: 4/3;
+    background-image: url('Casa.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 70px var(--shadow);
+  }
+  .location h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .location h2 em { font-style: italic; color: var(--accent-deep); }
+  .location p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    margin-bottom: 32px;
+  }
+  .address-card {
+    background: var(--paper);
+    padding: 24px;
+    margin-bottom: 32px;
+    border-left: 3px solid var(--accent);
+  }
+  .address-card .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .address-card .addr {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .distances {
+    display: grid;
+    gap: 12px;
+  }
+  .dist {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(42, 37, 32, 0.12);
+    font-size: 15px;
+  }
+  .dist strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--accent-deep);
+  }
+
+  /* ============ BOOKING ============ */
+  .booking {
+    padding: 100px 6vw;
+    text-align: center;
+  }
+  .booking-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .booking h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .booking h2 em { font-style: italic; color: var(--accent-deep); }
+  .booking p {
+    color: var(--ink-soft);
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  .booking-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 38px;
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid;
+  }
+  .btn-airbnb {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .btn-airbnb:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+  .btn-booking {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-booking:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .price-card {
+    background: var(--paper);
+    padding: 40px;
+    margin: 50px auto 40px;
+    max-width: 500px;
+    border: 1px solid rgba(42, 37, 32, 0.1);
+  }
+  .price-card .from {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--ink-soft);
+  }
+  .price-card .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 500;
+    color: var(--accent-deep);
+    line-height: 1;
+    margin: 8px 0;
+  }
+  .price-card .price small {
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .price-card .note {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 70px 6vw 30px;
+    text-align: center;
+  }
+  footer .logo {
+    color: var(--paper);
+    margin-bottom: 20px;
+  }
+  footer .logo span { color: #ffd9ad; }
+  footer p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .footer-contact {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .footer-contact a {
+    color: #ffd9ad;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s;
+  }
+  .footer-contact a:hover { color: #fff; }
+  .copyright {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag { animation: fadeUp 0.8s 0.2s both; }
+  .hero h1 { animation: fadeUp 1s 0.4s both; }
+  .hero-sub { animation: fadeUp 1s 0.6s both; }
+  .hero-cta { animation: fadeUp 1s 0.8s both; }
+  .hero-meta { animation: fadeUp 1s 1s both; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s, transform 1s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Casa <span>Dunărea</span></div>
+  <div class="nav-links">
+    <a href="#despre">Despre</a>
+    <a href="#facilitati">Facilități</a>
+    <a href="#camere">Camere</a>
+    <a href="#obiective">Obiective</a>
+    <a href="#locatie">Locație</a>
+    <a href="#rezervare">Rezervare</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Cazare cu suflet — Orșova, Mehedinți</div>
+    <h1>O priveliște <em>peste Dunăre</em><br>care îți rămâne în memorie.</h1>
+    <p class="hero-sub">O casă liniștită pe deal, cu grădină îngrijită, livadă și apusuri care colorează cerul deasupra fluviului. Un loc unde timpul curge mai încet.</p>
+    <a href="#rezervare" class="hero-cta">
+      Rezervă șederea <span class="arrow">→</span>
+    </a>
+  </div>
+  <div class="hero-meta">
+    Orșova, Mehedinți<br>
+    <strong>Str. Teiului nr. 31</strong>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro reveal" id="despre">
+  <div class="intro-image"></div>
+  <div>
+    <span class="intro-label">— Bine ați venit</span>
+    <h2>O casă caldă, înconjurată <em>de viță-de-vie</em> și flori.</h2>
+    <p>Casa noastră se află pe strada Teiului din Orșova, într-o zonă liniștită, pe o stradă curată, mărginită de garduri vechi din piatră de râu și ziduri îmbrăcate în viță. Acoperișul de țiglă roșie, pereții albi și grădina mereu îngrijită fac din această casă un loc cu adevărat primitor.</p>
+    <p>Oaspeții noștri se bucură de camere individuale, fiecare cu propria baie, o bucătărie comună spațioasă, un grătar pentru serile lungi de vară și o grădină plină de trandafiri, lavandă și pomi fructiferi.</p>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="facilities" id="facilitati">
+  <div class="facilities-inner">
+    <div class="section-head reveal">
+      <span class="label">— Facilități</span>
+      <h2>Tot ce ai nevoie, <em>nimic în plus</em>.</h2>
+      <p class="sub">Confort autentic, fără ostentație. Fiecare detaliu este gândit pentru ca șederea ta să fie liniștită și plăcută.</p>
+    </div>
+    <div class="facility-grid reveal">
+      <div class="fac">
+        <div class="fac-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M2 8v10h20V8M2 8l10-5 10 5M4 18v2M20 18v2M7 12h2M11 12h2M15 12h2"/>
+          </svg>
+        </div>
+        <h4>Baie individuală</h4>
+        <p>Fiecare cameră are propria baie privată cu duș.</p>
+      </div>
+      <div class="fac">
+        <div class="fac-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M3 10h18M5 10v10h14V10M8 6c0-1.5 1-2 2-2s2 1 2 2-1 2-2 2M14 6c0-1.5 1-2 2-2s2 1 2 2-1 2-2 2"/>
+          </svg>
+        </div>
+        <h4>Bucătărie comună</h4>
+        <p>Spațiu generos, dotat complet pentru gătit și luat masa.</p>
+      </div>
+      <div class="fac">
+        <div class="fac-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M5 14h14l-2 6H7l-2-6zM7 14V10a5 5 0 0110 0v4M10 6V4M14 6V4M12 4V2"/>
+          </svg>
+        </div>
+        <h4>Grătar în grădină</h4>
+        <p>Zonă amenajată pentru BBQ, ideală pentru seri de vară.</p>
+      </div>
+      <div class="fac">
+        <div class="fac-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M12 22V12M12 12c-3-3-7-3-7 1 0 3 4 3 7 1zM12 12c3-3 7-3 7 1 0 3-4 3-7 1zM12 8c-2-2-2-5 0-6 2 1 2 4 0 6z"/>
+          </svg>
+        </div>
+        <h4>Grădină cu flori</h4>
+        <p>Trandafiri, lavandă, livadă și pomi fructiferi.</p>
+      </div>
+      <div class="fac">
+        <div class="fac-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/>
+          </svg>
+        </div>
+        <h4>Wi-Fi gratuit</h4>
+        <p>Internet de mare viteză în toate camerele.</p>
+      </div>
+      <div class="fac">
+        <div class="fac-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="3" y="11" width="18" height="10" rx="2"/>
+            <circle cx="7" cy="16" r="1"/>
+            <circle cx="17" cy="16" r="1"/>
+            <path d="M5 11V7a7 7 0 0114 0v4"/>
+          </svg>
+        </div>
+        <h4>Parcare gratuită</h4>
+        <p>Loc privat de parcare în curtea casei.</p>
+      </div>
+      <div class="fac">
+        <div class="fac-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </div>
+        <h4>Vedere panoramică</h4>
+        <p>Priveliște deschisă spre Dunăre și munți.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="camere">
+  <div class="section-head reveal">
+    <span class="label">— Camere & Spații</span>
+    <h2>Camere primitoare, <em>fiecare cu povestea ei</em>.</h2>
+    <p class="sub">Camere individuale cu baie privată, plus spațiile comune unde se nasc cele mai frumoase amintiri de vacanță.</p>
+  </div>
+
+  <!-- Room 1 -->
+  <div class="room reveal">
+    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1400&q=80');"></div>
+    <div class="room-text">
+      <span class="room-num">— Camera I</span>
+      <h3>Dormitor <em>luminos</em> cu vedere la grădină</h3>
+      <p>Cameră generoasă cu pat dublu, lemn cald și ferestre mari ce dau spre livadă. Lumina dimineții ajunge direct la masa de cafea.</p>
+      <ul class="room-features">
+        <li><span>Pat dublu</span><span>1 × Queen</span></li>
+        <li><span>Suprafață</span><span>~ 18 m²</span></li>
+        <li><span>Baie privată</span><span>Da, cu duș</span></li>
+        <li><span>Ocupanți maxim</span><span>2 persoane</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Room 2 -->
+  <div class="room reveal">
+    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1400&q=80');"></div>
+    <div class="room-text">
+      <span class="room-num">— Camera II</span>
+      <h3>Dormitor <em>rustic</em> cu accente moderne</h3>
+      <p>Atmosferă caldă, cu grinzi de lemn aparente, lenjerii de bumbac și o atmosferă liniștită care invită la odihnă după o zi plină.</p>
+      <ul class="room-features">
+        <li><span>Pat dublu</span><span>1 × Queen</span></li>
+        <li><span>Suprafață</span><span>~ 16 m²</span></li>
+        <li><span>Baie privată</span><span>Da, cu duș</span></li>
+        <li><span>Ocupanți maxim</span><span>2 persoane</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bathroom -->
+  <div class="room reveal">
+    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1400&q=80');"></div>
+    <div class="room-text">
+      <span class="room-num">— Băi private</span>
+      <h3>Băi <em>moderne</em>, finisaje de calitate</h3>
+      <p>Fiecare cameră vine cu propria baie privată, complet renovată, cu duș, prosoape moi și articole de toaletă de bun-venit.</p>
+      <ul class="room-features">
+        <li><span>Duș cu apă caldă</span><span>24/7</span></li>
+        <li><span>Prosoape & săpun</span><span>Incluse</span></li>
+        <li><span>Uscător de păr</span><span>Disponibil</span></li>
+        <li><span>Curățenie</span><span>Zilnică</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Kitchen -->
+  <div class="room reveal">
+    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&q=80');"></div>
+    <div class="room-text">
+      <span class="room-num">— Spațiu comun</span>
+      <h3>Bucătărie <em>complet utilată</em> pentru gătit</h3>
+      <p>O bucătărie spațioasă, în stil rustic-modern, unde poți pregăti micul-dejun, o cină în familie sau o cafea de dimineață cu vedere la grădină.</p>
+      <ul class="room-features">
+        <li><span>Aragaz & cuptor</span><span>Da</span></li>
+        <li><span>Frigider & congelator</span><span>Da</span></li>
+        <li><span>Espressor cafea</span><span>Da</span></li>
+        <li><span>Veselă & ustensile</span><span>Complete</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BBQ -->
+  <div class="room reveal">
+    <div class="room-img" style="background-image: url('Gratar.webp');"></div>
+    <div class="room-text">
+      <span class="room-num">— Grădină</span>
+      <h3>Grătar din <em>cărămidă</em>, sub acoperiș de lemn</h3>
+      <p>Zonă acoperită cu grătar tradițional din cărămidă, cuptor cu lemne și șemineu — locul perfect pentru o seară de neuitat, indiferent de vreme, sub cerul plin de stele al Orșovei.</p>
+      <ul class="room-features">
+        <li><span>Grătar din cărămidă</span><span>Da</span></li>
+        <li><span>Cuptor cu lemne</span><span>Da</span></li>
+        <li><span>Zonă acoperită</span><span>Da</span></li>
+        <li><span>Lemne la cerere</span><span>Disponibile</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Garden -->
+  <div class="room reveal">
+    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&q=80');"></div>
+    <div class="room-text">
+      <span class="room-num">— Grădina noastră</span>
+      <h3>O grădină plină de <em>trandafiri și lavandă</em></h3>
+      <p>O grădină îngrijită cu drag, cu trandafiri, lavandă, pomi fructiferi și colțișoare unde te poți pierde cu o carte. Vara, parfumul florilor umple toată curtea.</p>
+      <ul class="room-features">
+        <li><span>Suprafață grădină</span><span>~ 400 m²</span></li>
+        <li><span>Pomi fructiferi</span><span>Cireși, pruni, meri</span></li>
+        <li><span>Zonă de relaxare</span><span>Bănci & hamac</span></li>
+        <li><span>Acces oaspeți</span><span>Liber, oricând</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VIEW BANNER -->
+<section class="view-section">
+  <div class="view-bg"></div>
+  <div class="view-inner reveal">
+    <span class="label">— Apusuri peste Dunăre</span>
+    <h2>Seri în care <em>cerul devine de aur</em>.</h2>
+    <p>De pe deal, privirea cuprinde tot orașul Orșova, fluviul Dunărea și munții Serbiei. Un spectacol natural care se schimbă în fiecare seară — și pe care nu îl vei uita curând.</p>
+  </div>
+</section>
+
+<!-- ATTRACTIONS -->
+<section class="attractions" id="obiective">
+  <div class="section-head reveal">
+    <span class="label">— Obiective turistice</span>
+    <h2>Ce poți <em>descoperi</em> în zonă.</h2>
+    <p class="sub">Orșova este poarta către cele mai spectaculoase peisaje ale Dunării. Iată câteva dintre obiectivele pe care nu ar trebui să le ratați.</p>
+  </div>
+
+  <div class="attractions-grid">
+    <div class="attraction reveal">
+      <div class="attraction-img" style="background-image: url('Ion_Dragalina.jfif');">
+        <span class="attraction-badge">5 min</span>
+      </div>
+      <div class="attraction-body">
+        <h4>Parcul General <em>Ion Drăgălina</em></h4>
+        <p>Unicul parc tip insulă din România — o oază de verdeață înconjurată de apă, locul perfect pentru o plimbare relaxantă sau o cafea la umbră.</p>
+        <div class="attraction-meta">
+          <span>În inima orașului</span>
+          <span>Unic în România</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="attraction reveal">
+      <div class="attraction-img" style="background-image: url('manastirea-sfanta-ana.jpg');">
+        <span class="attraction-badge">15 min</span>
+      </div>
+      <div class="attraction-body">
+        <h4>Mănăstirea <em>Sfânta Ana</em></h4>
+        <p>Mănăstire de maici așezată pe vârf de munte, deasupra Orșovei. Drumul până sus oferă una dintre cele mai frumoase priveliști din zonă, iar liniștea locului este de neuitat.</p>
+        <div class="attraction-meta">
+          <span>Pe vârf de munte</span>
+          <span>Doar maicuțe</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="attraction reveal">
+      <div class="attraction-img" style="background-image: url('Faleza_Dunarii.jfif');">
+        <span class="attraction-badge">5 min</span>
+      </div>
+      <div class="attraction-body">
+        <h4>Faleza <em>Dunării</em></h4>
+        <p>Promenadă de 3 km de-a lungul Dunării — un loc magnific pentru plimbări de seară, jogging sau o cafea cu vedere la apă. Vara, locul prinde viață cu terase și evenimente.</p>
+        <div class="attraction-meta">
+          <span>3 km promenadă</span>
+          <span>Acces gratuit</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="attraction reveal">
+      <div class="attraction-img" style="background-image: url('Cazanele_Dunarii.png');">
+        <span class="attraction-badge">~ 10 km</span>
+      </div>
+      <div class="attraction-body">
+        <h4>Cazanele <em>Dunării</em></h4>
+        <p>Una dintre cele mai spectaculoase priveliști din România — defileul Dunării, unde fluviul se strânge între munți. Recomandat cu plimbare cu vaporașul.</p>
+        <div class="attraction-meta">
+          <span>Defileul Dunării</span>
+          <span>Plimbare cu barca</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="attraction attraction-wide reveal">
+      <div class="attraction-img" style="background-image: url('Chipul-lui-Decebal.jpg');">
+        <span class="attraction-badge">~ 10 km</span>
+      </div>
+      <div class="attraction-body">
+        <h4>Chipul lui <em>Decebal</em></h4>
+        <p>Cea mai înaltă sculptură în piatră din Europa, cu o înălțime impresionantă de 54 m, săpată direct în stânca de pe malul Dunării. Un simbol al istoriei și mândriei locale, pe care îl admiri cel mai bine de pe apă, în timpul unei plimbări cu vaporașul prin Cazanele Dunării.</p>
+        <div class="attraction-meta">
+          <span>54 metri înălțime</span>
+          <span>Cea mai mare din Europa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="locatie">
+  <div class="location-inner">
+    <div class="location-img"></div>
+    <div>
+      <span class="intro-label">— Locație</span>
+      <h2>În inima <em>Orșovei</em>, aproape de tot.</h2>
+      <p>Casa noastră este situată pe un deal liniștit din Orșova, la doar câteva minute de centrul orașului și de toate obiectivele turistice importante din zonă.</p>
+
+      <div class="address-card">
+        <div class="lbl">Adresa</div>
+        <div class="addr">Str. Teiului nr. 31<br>Orșova, jud. Mehedinți</div>
+      </div>
+
+      <div class="distances">
+        <div class="dist"><span>Centrul Orșovei</span><strong>5 min</strong></div>
+        <div class="dist"><span>Parcul Drăgălina</span><strong>5 min</strong></div>
+        <div class="dist"><span>Faleza Dunării</span><strong>5 min</strong></div>
+        <div class="dist"><span>Mănăstirea Sf. Ana</span><strong>15 min</strong></div>
+        <div class="dist"><span>Cazanele Dunării</span><strong>~ 10 km</strong></div>
+        <div class="dist"><span>Chipul lui Decebal</span><strong>~ 10 km</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="rezervare">
+  <div class="booking-inner reveal">
+    <span class="intro-label">— Rezervări</span>
+    <h2>Rezervă-ți <em>șederea</em> chiar acum.</h2>
+    <p>Suntem listați pe cele mai populare platforme. Alege cum preferi să rezervi — confirmarea e instantanee.</p>
+
+    <div class="price-card">
+      <div class="from">de la</div>
+      <div class="price">€45 <small>/ noapte</small></div>
+      <div class="note">Pentru o cameră dublă, cu mic-dejun inclus</div>
+    </div>
+
+    <div class="booking-buttons">
+      <a href="#" class="btn btn-airbnb">
+        Rezervă pe Airbnb <span>→</span>
+      </a>
+      <a href="#" class="btn btn-booking">
+        Rezervă pe Booking <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Casa <span>Dunărea</span></div>
+  <p>Cazare cu suflet, în Orșova · Str. Teiului nr. 31</p>
+  <div class="footer-contact">
+    <a href="tel:+40700000000">+40 700 000 000</a>
+    <a href="mailto:contact@casadunarea.ro">contact@casadunarea.ro</a>
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+  </div>
+  <div class="copyright">© 2026 Casa Dunărea · Toate drepturile rezervate</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

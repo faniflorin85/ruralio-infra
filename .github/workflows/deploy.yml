@@ -1,0 +1,106 @@
+###############################################################################
+# deploy.yml — Pipeline CI/CD pentru Ruralio
+#
+# Pe Pull Request  -> ruleaza `terraform plan` (doar verifica, nu aplica)
+# Pe push in main  -> ruleaza `terraform apply` + deploy site pe server
+###############################################################################
+name: Deploy Ruralio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Necesar pentru autentificarea OIDC catre AWS
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: eu-central-1
+  TF_WORKING_DIR: ./terraform
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    outputs:
+      instance_ip: ${{ steps.tf_output.outputs.instance_ip }}
+    steps:
+      - name: Checkout cod
+        uses: actions/checkout@v4
+
+      - name: Configureaza credentialele AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # Inlocuieste <ACCOUNT_ID> cu Account ID-ul tau (332241527149)
+          role-to-assume: arn:aws:iam::332241527149:role/ruralio-github-actions
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Instaleaza Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform init
+
+      - name: Terraform Format Check
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform validate
+
+      # --- Pe Pull Request: doar PLAN (nu modifica nimic) ---
+      - name: Terraform Plan
+        if: github.event_name == 'pull_request'
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform plan -input=false
+
+      # --- Pe push in main: APPLY ---
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform apply -auto-approve -input=false
+
+      - name: Citeste IP-ul instantei
+        id: tf_output
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: echo "instance_ip=$(terraform output -raw instance_public_ip)" >> "$GITHUB_OUTPUT"
+
+  # --- Job separat: copiaza site-ul pe server, dupa ce infra e gata ---
+  deploy-site:
+    name: Deploy Site
+    needs: terraform
+    runs-on: ubuntu-latest
+    # Ruleaza doar la push in main
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Checkout cod
+        uses: actions/checkout@v4
+
+      - name: Copiaza fisierele site-ului pe server (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ needs.terraform.outputs.instance_ip }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "site/*"
+          target: "/tmp/ruralio-site"
+          strip_components: 1
+
+      - name: Muta fisierele in directorul Nginx
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ needs.terraform.outputs.instance_ip }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo rm -rf /var/www/html/*
+            sudo cp -r /tmp/ruralio-site/* /var/www/html/
+            sudo systemctl reload nginx

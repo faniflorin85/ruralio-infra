@@ -1,0 +1,12 @@
+###############################################################################
+# terraform.tfvars.example — ȘABLON
+#
+# Copiază acest fișier în `terraform.tfvars` și completează valorile tale.
+# terraform.tfvars NU se urcă pe GitHub (e în .gitignore).
+###############################################################################
+
+# IP-ul tău public, în format CIDR /32. Află-l cu: curl ifconfig.me
+ssh_allowed_cidr = "1.2.3.4/32"
+
+# Repository-ul tău GitHub, format owner/repo
+github_repo = "numele-tau/ruralio-infra"

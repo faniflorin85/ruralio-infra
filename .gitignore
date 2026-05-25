@@ -1,0 +1,33 @@
+# --- Terraform ---------------------------------------------------------------
+# State files — NU se urca niciodata in Git (sunt in S3)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Director de lucru Terraform
+.terraform/
+.terraform.lock.hcl
+
+# Fisiere cu variabile — pot contine valori sensibile (IP-uri, etc.)
+*.tfvars
+!*.tfvars.example
+
+# Fisiere de plan
+*.tfplan
+crash.log
+crash.*.log
+
+# --- Credentiale AWS ----------------------------------------------------------
+.aws/
+credentials
+
+# --- Chei SSH -----------------------------------------------------------------
+*.pem
+id_rsa*
+id_ed25519*
+ruralio
+ruralio.pub
+
+# --- Sistem -------------------------------------------------------------------
+.DS_Store
+*.swp
