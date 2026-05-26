@@ -38,11 +38,6 @@ variable "instance_type" {
   default     = "t3.micro"
 }
 
-variable "ssh_allowed_cidr" {
-  description = "CIDR de pe care e permis accesul SSH (IP-ul tău public, ex: 1.2.3.4/32). NU lăsa 0.0.0.0/0!"
-  type        = string
-  # Fără default intenționat — trebuie setat de tine în terraform.tfvars
-}
 
 variable "github_repo" {
   description = "Repository-ul GitHub în format owner/repo (pentru OIDC trust policy)"

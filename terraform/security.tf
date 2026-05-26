@@ -32,14 +32,14 @@ resource "aws_vpc_security_group_ingress_rule" "https" {
   cidr_ipv4         = "0.0.0.0/0"
 }
 
-# --- SSH (port 22) — DOAR de pe IP-ul tău (variabila ssh_allowed_cidr) -------
+# --- SSH (port 22) — deschis pentru GitHub Actions (autentificare prin cheie SSH)
 resource "aws_vpc_security_group_ingress_rule" "ssh" {
   security_group_id = aws_security_group.web.id
-  description       = "SSH doar de pe IP-ul administratorului"
+  description       = "SSH pentru GitHub Actions si administrator"
   from_port         = 22
   to_port           = 22
   ip_protocol       = "tcp"
-  cidr_ipv4         = var.ssh_allowed_cidr
+  cidr_ipv4         = "0.0.0.0/0"
 }
 
 # --- Egress: permite tot traficul de ieșire ----------------------------------
