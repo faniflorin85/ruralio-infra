@@ -87,6 +87,21 @@ jobs:
       - name: Checkout cod
         uses: actions/checkout@v4
 
+      - name: Asteapta SSH sa fie disponibil
+        run: |
+          echo "Asteptam SSH la ${{ needs.terraform.outputs.instance_ip }}:22 (max 8 minute)..."
+          for i in $(seq 1 48); do
+            if nc -z -w 5 "${{ needs.terraform.outputs.instance_ip }}" 22 2>/dev/null; then
+              echo "SSH disponibil dupa $((i * 10)) secunde. Asteptam 20s pentru stabilizare..."
+              sleep 20
+              exit 0
+            fi
+            echo "Incercare $i/48..."
+            sleep 10
+          done
+          echo "EROARE: SSH nu a devenit disponibil in 8 minute."
+          exit 1
+
       - name: Copiaza fisierele site-ului pe server (SCP)
         uses: appleboy/scp-action@v0.1.7
         with:
