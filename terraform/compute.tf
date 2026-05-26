@@ -23,7 +23,7 @@ data "aws_ami" "ubuntu" {
 # Generează o pereche local cu:  ssh-keygen -t ed25519 -f ~/.ssh/ruralio
 resource "aws_key_pair" "main" {
   key_name   = "${var.project_name}-key"
-  public_key = file("~/.ssh/ruralio.pub")
+  public_key = var.ssh_public_key
 }
 
 # --- Instanța EC2 ------------------------------------------------------------

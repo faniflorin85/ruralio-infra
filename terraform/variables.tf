@@ -49,3 +49,8 @@ variable "github_repo" {
   type        = string
   # ex: "numele-tau/ruralio-infra"
 }
+
+variable "ssh_public_key" {
+  description = "Conținutul cheii SSH publice (~/.ssh/ruralio.pub) — setat via secret în GitHub Actions"
+  type        = string
+}

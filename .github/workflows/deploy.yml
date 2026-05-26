@@ -27,6 +27,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       instance_ip: ${{ steps.tf_output.outputs.instance_ip }}
+    env:
+      TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+      TF_VAR_ssh_allowed_cidr: ${{ secrets.SSH_ALLOWED_CIDR }}
+      TF_VAR_github_repo: faniflorin85/ruralio-infra
     steps:
       - name: Checkout cod
         uses: actions/checkout@v4
