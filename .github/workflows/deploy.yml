@@ -112,13 +112,55 @@ jobs:
           target: "/tmp/ruralio-site"
           strip_components: 1
 
-      - name: Muta fisierele in directorul Nginx
+      - name: Copiaza configuratia Nginx (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ needs.terraform.outputs.instance_ip }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "nginx/*"
+          target: "/tmp/ruralio-nginx"
+          strip_components: 1
+
+      - name: Deploy site, Nginx si SSL
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ needs.terraform.outputs.instance_ip }}
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
+            DOMAIN="ruralio.ro"
+            EMAIL="faniflorin85@gmail.com"
+
+            # 1. Deploy fisiere site
             sudo rm -rf /var/www/html/*
             sudo cp -r /tmp/ruralio-site/* /var/www/html/
-            sudo systemctl reload nginx
+
+            # 2. Activeaza config Nginx HTTP (necesar pentru validarea Certbot)
+            sudo cp /tmp/ruralio-nginx/ruralio-http.conf /etc/nginx/sites-available/ruralio.conf
+            sudo ln -sf /etc/nginx/sites-available/ruralio.conf /etc/nginx/sites-enabled/ruralio.conf
+            sudo rm -f /etc/nginx/sites-enabled/default
+            sudo nginx -t && sudo systemctl reload nginx
+
+            # 3. Obtine certificat SSL daca nu exista deja
+            if [ ! -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ]; then
+              echo "Obtinem certificat SSL pentru $DOMAIN..."
+              if sudo certbot certonly --webroot -w /var/www/html \
+                  --non-interactive --agree-tos --email "$EMAIL" \
+                  -d "$DOMAIN" -d "www.$DOMAIN"; then
+                echo "Certificat SSL obtinut cu succes."
+              else
+                echo "ATENTIE: Certbot a esuat. DNS-ul pentru $DOMAIN nu este inca configurat."
+                echo "Configureaza inregistrarile A la registrar si re-ruleaza pipeline-ul."
+                exit 0
+              fi
+            else
+              echo "Certificat SSL existent — verificam reinnoire..."
+              sudo certbot renew --quiet
+            fi
+
+            # 4. Activeaza config HTTPS complet (cu headere de securitate)
+            sudo cp /tmp/ruralio-nginx/ruralio-https.conf /etc/nginx/sites-available/ruralio.conf
+            sudo nginx -t && sudo systemctl reload nginx
+            echo "HTTPS activ pe https://$DOMAIN"

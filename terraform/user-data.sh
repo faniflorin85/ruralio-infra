@@ -23,7 +23,7 @@ cat > /var/www/html/index.html <<'EOF'
 <head><meta charset="UTF-8"><title>Ruralio</title></head>
 <body style="font-family:sans-serif;text-align:center;padding-top:80px">
   <h1>Server pregatit</h1>
-  <p>Site-ul Casa Dunarea va fi disponibil in curand.</p>
+  <p>Site-ul Casa Tzau va fi disponibil in curand.</p>
 </body>
 </html>
 EOF
