@@ -291,16 +291,37 @@
   @media (max-width: 520px) {
     .facility-grid { grid-template-columns: 1fr; }
   }
+  /* Flip card wrapper */
   .fac {
-    text-align: center;
-    padding: 32px 20px;
+    perspective: 1000px;
+    height: 300px;
+  }
+  .fac-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.65s cubic-bezier(.4,0,.2,1);
+    transform-style: preserve-3d;
+  }
+  .fac:hover .fac-inner {
+    transform: rotateY(180deg);
+  }
+  .fac-front, .fac-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  /* Front: icon + text */
+  .fac-front {
     background: var(--paper);
     border: 1px solid rgba(42, 37, 32, 0.06);
-    transition: transform 0.4s, box-shadow 0.4s;
-  }
-  .fac:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    text-align: center;
   }
   .fac-icon {
     width: 56px; height: 56px;
@@ -310,15 +331,34 @@
     justify-content: center;
     color: var(--accent);
   }
-  .fac h4 {
+  .fac-front h4 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 8px;
   }
-  .fac p {
+  .fac-front p {
     font-size: 14px;
     color: var(--ink-soft);
+  }
+  /* Back: photo + label */
+  .fac-back {
+    transform: rotateY(180deg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+  }
+  .fac-back-label {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(20, 15, 10, 0.60);
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.03em;
   }
 
   /* ============ GALLERY ============ */
@@ -796,73 +836,148 @@
       <p class="sub">Confort autentic, fără ostentație. Fiecare detaliu este gândit pentru ca șederea ta să fie liniștită și plăcută.</p>
     </div>
     <div class="facility-grid reveal">
+
       <div class="fac">
-        <div class="fac-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path d="M2 8v10h20V8M2 8l10-5 10 5M4 18v2M20 18v2M7 12h2M11 12h2M15 12h2"/>
-          </svg>
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M2 8v10h20V8M2 8l10-5 10 5M4 18v2M20 18v2M7 12h2M11 12h2M15 12h2"/>
+              </svg>
+            </div>
+            <h4>Baie individuală</h4>
+            <p>Fiecare cameră are propria baie privată cu duș.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('Baie.webp');">
+            <div class="fac-back-label">Baie individuală</div>
+          </div>
         </div>
-        <h4>Baie individuală</h4>
-        <p>Fiecare cameră are propria baie privată cu duș.</p>
       </div>
+
       <div class="fac">
-        <div class="fac-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path d="M3 10h18M5 10v10h14V10M8 6c0-1.5 1-2 2-2s2 1 2 2-1 2-2 2M14 6c0-1.5 1-2 2-2s2 1 2 2-1 2-2 2"/>
-          </svg>
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M3 10h18M5 10v10h14V10M8 6c0-1.5 1-2 2-2s2 1 2 2-1 2-2 2M14 6c0-1.5 1-2 2-2s2 1 2 2-1 2-2 2"/>
+              </svg>
+            </div>
+            <h4>Bucătărie comună</h4>
+            <p>Spațiu generos, dotat complet pentru gătit și luat masa.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('bucatarie.webp');">
+            <div class="fac-back-label">Bucătărie comună</div>
+          </div>
         </div>
-        <h4>Bucătărie comună</h4>
-        <p>Spațiu generos, dotat complet pentru gătit și luat masa.</p>
       </div>
+
       <div class="fac">
-        <div class="fac-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path d="M5 14h14l-2 6H7l-2-6zM7 14V10a5 5 0 0110 0v4M10 6V4M14 6V4M12 4V2"/>
-          </svg>
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M5 14h14l-2 6H7l-2-6zM7 14V10a5 5 0 0110 0v4M10 6V4M14 6V4M12 4V2"/>
+              </svg>
+            </div>
+            <h4>Grătar în grădină</h4>
+            <p>Zonă amenajată pentru BBQ, ideală pentru seri de vară.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('Gratar si terasa.png');">
+            <div class="fac-back-label">Grătar & Terasă</div>
+          </div>
         </div>
-        <h4>Grătar în grădină</h4>
-        <p>Zonă amenajată pentru BBQ, ideală pentru seri de vară.</p>
       </div>
+
       <div class="fac">
-        <div class="fac-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path d="M12 22V12M12 12c-3-3-7-3-7 1 0 3 4 3 7 1zM12 12c3-3 7-3 7 1 0 3-4 3-7 1zM12 8c-2-2-2-5 0-6 2 1 2 4 0 6z"/>
-          </svg>
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M12 22V12M12 12c-3-3-7-3-7 1 0 3 4 3 7 1zM12 12c3-3 7-3 7 1 0 3-4 3-7 1zM12 8c-2-2-2-5 0-6 2 1 2 4 0 6z"/>
+              </svg>
+            </div>
+            <h4>Grădină cu flori</h4>
+            <p>Trandafiri, lavandă, livadă și pomi fructiferi.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('Gradina.png');">
+            <div class="fac-back-label">Grădina noastră</div>
+          </div>
         </div>
-        <h4>Grădină cu flori</h4>
-        <p>Trandafiri, lavandă, livadă și pomi fructiferi.</p>
       </div>
+
       <div class="fac">
-        <div class="fac-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/>
-          </svg>
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/>
+              </svg>
+            </div>
+            <h4>Wi-Fi gratuit</h4>
+            <p>Internet de mare viteză în toate camerele.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('Router.jpg');">
+            <div class="fac-back-label">Wi-Fi gratuit</div>
+          </div>
         </div>
-        <h4>Wi-Fi gratuit</h4>
-        <p>Internet de mare viteză în toate camerele.</p>
       </div>
+
       <div class="fac">
-        <div class="fac-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-            <rect x="3" y="11" width="18" height="10" rx="2"/>
-            <circle cx="7" cy="16" r="1"/>
-            <circle cx="17" cy="16" r="1"/>
-            <path d="M5 11V7a7 7 0 0114 0v4"/>
-          </svg>
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="3" y="11" width="18" height="10" rx="2"/>
+                <circle cx="7" cy="16" r="1"/>
+                <circle cx="17" cy="16" r="1"/>
+                <path d="M5 11V7a7 7 0 0114 0v4"/>
+              </svg>
+            </div>
+            <h4>Parcare gratuită</h4>
+            <p>Loc privat de parcare în curtea casei.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('Parcare.jfif');">
+            <div class="fac-back-label">Acces & Parcare</div>
+          </div>
         </div>
-        <h4>Parcare gratuită</h4>
-        <p>Loc privat de parcare în curtea casei.</p>
       </div>
+
       <div class="fac">
-        <div class="fac-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-            <circle cx="12" cy="12" r="4"/>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-          </svg>
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+            </div>
+            <h4>Vedere panoramică</h4>
+            <p>Priveliște deschisă spre Dunăre și munți.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('Vedere Dunare.png');">
+            <div class="fac-back-label">Vedere spre Dunăre</div>
+          </div>
         </div>
-        <h4>Vedere panoramică</h4>
-        <p>Priveliște deschisă spre Dunăre și munți.</p>
       </div>
+
+      <div class="fac">
+        <div class="fac-inner">
+          <div class="fac-front">
+            <div class="fac-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2zM9 22V12h6v10"/>
+                <path d="M12 2v4M8 6h8"/>
+              </svg>
+            </div>
+            <h4>Beci tradițional</h4>
+            <p>Temperatură naturală constantă, ideal pentru vin și murături.</p>
+          </div>
+          <div class="fac-back" style="background-image: url('Beci.png');">
+            <div class="fac-back-label">Beciul casei</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
