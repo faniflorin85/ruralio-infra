@@ -11,6 +11,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  # Permite rularea manuala din tab-ul Actions (util pentru re-deploy
+  # dupa recrearea instantei EC2, fara a fi nevoie de un commit nou)
+  workflow_dispatch:
 
 # Necesar pentru autentificarea OIDC catre AWS
 permissions:
@@ -64,15 +67,15 @@ jobs:
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform plan -input=false
 
-      # --- Pe push in main: APPLY ---
+      # --- Pe push in main (sau rulare manuala): APPLY ---
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform apply -auto-approve -input=false
 
       - name: Citeste IP-ul instantei
         id: tf_output
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: echo "instance_ip=$(terraform output -raw instance_public_ip)" >> "$GITHUB_OUTPUT"
 
@@ -81,8 +84,8 @@ jobs:
     name: Deploy Site
     needs: terraform
     runs-on: ubuntu-latest
-    # Ruleaza doar la push in main
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # Ruleaza la push in main sau la rulare manuala (nu pe PR)
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     steps:
       - name: Checkout cod
         uses: actions/checkout@v4
