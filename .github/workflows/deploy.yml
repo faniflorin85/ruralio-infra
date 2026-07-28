@@ -106,7 +106,7 @@ jobs:
           exit 1
 
       - name: Copiaza fisierele site-ului pe server (SCP)
-        uses: appleboy/scp-action@v0.1.8
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ needs.terraform.outputs.instance_ip }}
           username: ubuntu
@@ -116,7 +116,7 @@ jobs:
           strip_components: 1
 
       - name: Copiaza configuratia Nginx (SCP)
-        uses: appleboy/scp-action@v0.1.8
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ needs.terraform.outputs.instance_ip }}
           username: ubuntu
@@ -126,7 +126,7 @@ jobs:
           strip_components: 1
 
       - name: Deploy site, Nginx si SSL
-        uses: appleboy/ssh-action@v1.2.0
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ needs.terraform.outputs.instance_ip }}
           username: ubuntu
